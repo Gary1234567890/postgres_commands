@@ -1,0 +1,28 @@
+pg_dump - backup single db
+location /opt/PostgreSQL/version/bin/
+
+backup -> pg_dump dbname > outfile
+restore -> psql dbname < infile
+if its non plain text use pg_restore to restore
+
+--examples
+pg_dump -U username -d dbname -C > savedscript.sql (the -C tells it to include create DB command)
+--remote (must have exact same version of pg_dump on both machines)
+pg_dump -h ipaddress -p port -d dbname -U user -C > script.sql
+
+--to copy a backup to a linux machine
+scp file remoteip:/folder
+
+--to login to psql 
+psql -U username
+--to check list of dbs 
+\l
+--create db
+create database dbname
+--to drop db
+drop database dbname
+--to quit
+\q
+
+--to restore DB
+psql -U postgres -d dbname < filename.sql
